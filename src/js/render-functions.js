@@ -40,7 +40,7 @@ export function markupRender(data) {
       </li>`
     )
     .join(' ');
-  refs.galleryBox.innerHTML = markup;
+
   const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
@@ -48,4 +48,5 @@ export function markupRender(data) {
     showCounter: false,
   });
   lightbox.refresh();
+  return markup;
 }

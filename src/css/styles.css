@@ -35,7 +35,8 @@
   letter-spacing: 0.04em;
   color: #808080;
 }
-.search-form .btn {
+.search-form .btn,
+.load-btn {
   background: #4e75ff;
   border-radius: 8px;
   padding: 8px 16px;
@@ -48,7 +49,16 @@
   letter-spacing: 0.04em;
   color: #fff;
 }
-.search-form .btn:hover {
+.load-btn {
+  width: 125px;
+  height: 40px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-form .btn:hover,
+.load-btn:hover {
   background: #6c8cff;
 }
 .gallery {
@@ -153,4 +163,15 @@
 .iziToast > .iziToast-body .iziToast-buttons > button {
   background: transparent !important;
   border: none !important;
+}
+
+.hidden {
+  display: none;
+  opacity: 0;
+}
+.loader-more {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
 }

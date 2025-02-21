@@ -2,9 +2,8 @@ import axios from 'axios';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import { refs, iziOpt } from '..//main.js';
-import { markupRender } from './render-functions.js';
 
-export function getImages(userImgKeyword) {
+export async function getImages(userImgKeyword, page, perPage) {
   const apiUrl = 'https://pixabay.com/api/';
   const params = {
     params: {
@@ -13,11 +12,12 @@ export function getImages(userImgKeyword) {
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
+      page,
+      per_page: perPage,
     },
   };
-  return axios
-    .get(apiUrl, params)
-    .then(res => {
+  try {
+    const data = await axios.get(apiUrl, params).then(res => {
       if (!res.data.hits.length) {
         refs.galleryBox.innerHTML = '';
         iziToast.show({
@@ -26,14 +26,15 @@ export function getImages(userImgKeyword) {
             'Sorry, there are no images matching your search query. Please, try again!',
         });
       }
-      markupRender(res.data.hits);
-    })
-    .catch(error => {
-      iziToast.show({
-        ...iziOpt,
-        message: 'Sorry, request error!',
-      });
-      refs.galleryBox.innerHTML = '';
-      console.log(error);
+      return res.data;
     });
+    return data;
+  } catch (error) {
+    iziToast.show({
+      ...iziOpt,
+      message: 'Sorry, request error!',
+    });
+    refs.galleryBox.innerHTML = '';
+    console.log(error);
+  }
 }
