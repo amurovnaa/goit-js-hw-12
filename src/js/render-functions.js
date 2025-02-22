@@ -3,7 +3,7 @@ import { hideLoadBtn, showLoadBtn } from './pixabay-api.js';
 
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { refs } from '..//main.js';
-
+let lightbox;
 export function markupRender(data) {
   const markup = data
     .map(
@@ -42,17 +42,20 @@ export function markupRender(data) {
       </li>`
     )
     .join(' ');
-
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-    captionPosition: 'bottom',
-    showCounter: false,
-  });
-  lightbox.refresh();
   return markup;
 }
-
+export function initLightbox() {
+  if (!lightbox) {
+    lightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
+      captionPosition: 'bottom',
+      showCounter: false,
+    });
+  } else {
+    lightbox.refresh();
+  }
+}
 export function addLoaderMore(loaderBox) {
   hideLoadBtn();
   loaderBox.insertAdjacentHTML(

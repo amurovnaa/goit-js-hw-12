@@ -7,6 +7,7 @@ import {
   markupRender,
   addLoaderMore,
   removeLoaderMore,
+  initLightbox,
 } from './js/render-functions';
 
 export const iziOpt = {
@@ -67,6 +68,7 @@ refs.form.addEventListener('submit', async e => {
     params.total = result.totalHits;
     const markup = markupRender(result.hits);
     refs.galleryBox.innerHTML = markup;
+    initLightbox();
     const resetInput = await setTimeout(() => {
       e.target.reset();
     }, 10);
@@ -95,6 +97,7 @@ refs.loadBtn.addEventListener('click', async () => {
     const markup = markupRender(result.hits);
     removeLoaderMore(refs.loaderMore);
     refs.galleryBox.insertAdjacentHTML('beforeend', markup);
+    initLightbox();
     scrollPage();
   } catch (error) {
     iziToast.show({
