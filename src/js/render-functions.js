@@ -1,4 +1,6 @@
 import SimpleLightbox from 'simplelightbox';
+import { hideLoadBtn, showLoadBtn } from './pixabay-api.js';
+
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { refs } from '..//main.js';
 
@@ -49,4 +51,19 @@ export function markupRender(data) {
   });
   lightbox.refresh();
   return markup;
+}
+
+export function addLoaderMore(loaderBox) {
+  hideLoadBtn();
+  loaderBox.insertAdjacentHTML(
+    'beforeend',
+    '<p class="loader-text">Loading images, please wait... <span class="loader"></span></p>'
+  );
+}
+export function removeLoaderMore(loaderBox) {
+  const textLoader = loaderBox.querySelector('.loader-text');
+  const loader = loaderBox.querySelector('.loader');
+  if (textLoader) textLoader.remove();
+  if (loader) loader.remove();
+  showLoadBtn();
 }
