@@ -113,7 +113,7 @@ refs.loadBtn.addEventListener('click', async () => {
 });
 
 function scrollPage() {
-  const info = refs.galleryBox.lastElementChild.getBoundingClientRect();
+  const info = refs.galleryBox.firstElementChild.getBoundingClientRect();
   const height = info.height;
   scrollBy({
     behavior: 'smooth',
