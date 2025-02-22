@@ -1,4 +1,9 @@
-import { getImages, hideLoadBtn, checkBtnStatus } from './js/pixabay-api';
+import {
+  getImages,
+  hideLoadBtn,
+  checkBtnStatus,
+  showLoadBtn,
+} from './js/pixabay-api';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import errorIcon from './img/errorIcon.svg';
@@ -94,8 +99,8 @@ refs.loadBtn.addEventListener('click', async () => {
     );
     const markup = markupRender(result.hits);
     removeLoaderMore(refs.loaderMore);
-    refs.galleryBox.insertAdjacentHTML('beforeend', markup);
     scrollPage();
+    refs.galleryBox.insertAdjacentHTML('beforeend', markup);
   } catch (error) {
     iziToast.show({
       ...iziOpt,

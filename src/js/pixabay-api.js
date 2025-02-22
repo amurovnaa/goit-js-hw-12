@@ -51,29 +51,31 @@ export function hideLoadBtn() {
 
 export function checkBtnStatus() {
   const maxPage = Math.ceil(params.total / params.perPage);
-  if (params.page >= maxPage) {
+  if (params.total === 0 || params.page >= maxPage) {
     hideLoadBtn();
-    iziToast.show({
-      messageColor: '#FFFFFF',
-      messageSize: '16px',
-      backgroundColor: '#0099FF',
-      iconUrl: infoIcon,
-      close: false,
-      buttons: [
-        [
-          `<button><img src = "${closeIcon}"/></button>`,
-          function (instance, toast) {
-            instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
-          },
-          true,
+    if (params.total > 0) {
+      iziToast.show({
+        messageColor: '#FFFFFF',
+        messageSize: '16px',
+        backgroundColor: '#0099FF',
+        iconUrl: infoIcon,
+        close: false,
+        buttons: [
+          [
+            `<button><img src = "${closeIcon}"/></button>`,
+            function (instance, toast) {
+              instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+            },
+            true,
+          ],
         ],
-      ],
-      transitionIn: 'bounceInLeft',
-      position: 'topRight',
-      displayMode: 'replace',
-      closeOnClick: true,
-      message: `We're sorry, but you've reached the end of search results.`,
-    });
+        transitionIn: 'bounceInLeft',
+        position: 'topRight',
+        displayMode: 'replace',
+        closeOnClick: true,
+        message: `We're sorry, but you've reached the end of search results.`,
+      });
+    }
   } else {
     showLoadBtn();
   }
